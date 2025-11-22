@@ -1,10 +1,10 @@
-package radion.ru.user_service;
+package radion.ru.logic_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class LogicServiceApplicationTests {
 
     @Test
     void contextLoads() {

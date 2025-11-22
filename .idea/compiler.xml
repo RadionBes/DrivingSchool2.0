@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Logic Service" target="21" />
+      <module name="User_Service.main" target="21" />
+      <module name="User_Service.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="API_Gateway" options="-parameters" />
@@ -8,12 +15,16 @@
       <module name="Eureka_Server" options="-parameters" />
       <module name="Eureka_Server.main" options="-parameters" />
       <module name="Eureka_Server.test" options="-parameters" />
+      <module name="General_Implementation" options="-parameters" />
+      <module name="General_Implementation.main" options="-parameters" />
+      <module name="General_Implementation.test" options="-parameters" />
+      <module name="Logic Service" options="-parameters" />
+      <module name="Logic_Service" options="-parameters" />
+      <module name="Logic_Service.main" options="-parameters" />
+      <module name="Logic_Service.test" options="-parameters" />
       <module name="Notification_Service" options="-parameters" />
       <module name="Notification_Service.main" options="-parameters" />
       <module name="Notification_Service.test" options="-parameters" />
-      <module name="User_Service" options="-parameters" />
-      <module name="User_Service.main" options="-parameters" />
-      <module name="User_Service.test" options="-parameters" />
     </option>
   </component>
 </project>
