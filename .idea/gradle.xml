@@ -13,6 +13,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Driving School Service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Driving School Service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/Eureka Server" />
         <option name="gradleJvm" value="graalvm-jdk-21" />
         <option name="modules">
@@ -43,6 +51,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/Notification Service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/User Service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/User Service" />
           </set>
         </option>
       </GradleProjectSettings>

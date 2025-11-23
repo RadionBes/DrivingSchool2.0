@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: User Service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/driving
+    password: root
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+server:
+  port: 0

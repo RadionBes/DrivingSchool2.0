@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/API_Gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/API_Gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/DrivingSchool.iml" filepath="$PROJECT_DIR$/DrivingSchool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Eureka_Server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Eureka_Server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UserService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UserService.main.iml" />
     </modules>
   </component>
 </project>
