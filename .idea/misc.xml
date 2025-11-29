@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/API Gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/Driving School Service" />
     <file type="web" url="file://$PROJECT_DIR$/Eureka Server" />
     <file type="web" url="file://$PROJECT_DIR$/General Implementation" />
     <file type="web" url="file://$PROJECT_DIR$/Logic Service" />

@@ -1,0 +1,30 @@
+### Get variables from environment
+@host = localhost
+@port = 58682
+@baseUrl = http://{{host}}:{{port}}
+
+### Sign In
+POST {{baseUrl}}/api/v1/auth/signIn
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123!"
+}
+
+### Sign Up
+
+POST {{baseUrl}}/api/v1/auth/signUp
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123!",
+  "surname": "Иванов",
+  "name": "Иван",
+  "patronymic": "Иванович",
+  "fullName": "Иванов Иван Иванович",
+  "birthday": "1990-05-15",
+  "phoneNumber": "89001234567",
+  "state": "EDUCATION"
+}

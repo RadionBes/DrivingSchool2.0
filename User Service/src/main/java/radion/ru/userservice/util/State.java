@@ -4,5 +4,5 @@ public enum State{
     EDUCATION,
     EXPELLED,
     FINISHED,
-
+    DONT_STUDY
 }

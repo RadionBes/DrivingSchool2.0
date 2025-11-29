@@ -1,9 +1,12 @@
 package radion.ru.userservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
+import radion.ru.userservice.dto.SignInUserDto;
 import radion.ru.userservice.dto.SignUpUserDto;
 import radion.ru.userservice.entity.UserSchool;
+import radion.ru.userservice.exception.exceptions.BadPasswordException;
 import radion.ru.userservice.jpa.UserJpaRepository;
 import radion.ru.userservice.mapper.UserMapper;
 import radion.ru.userservice.service.UserService;
@@ -26,6 +29,13 @@ public class UserServiceImpl implements UserService {
         return userJpaRepository.save(
                 userMapper.mapToUser(signUpUserDto)
         );
+    }
+
+    @Override
+    public String signIn(SignInUserDto signInUserDto) {
+        UserSchool user = userJpaRepository.findByEmail(signInUserDto.getEmail());
+        if (user.getPassword().equals(signInUserDto.getPassword())) return "Accesss!";
+        throw new BadPasswordException("Password is bad!");
     }
 
     @Override
