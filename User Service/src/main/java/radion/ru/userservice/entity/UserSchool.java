@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import radion.ru.userservice.util.Role;
 import radion.ru.userservice.util.State;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -56,4 +59,11 @@ public class UserSchool {
     private Set<Role> roles;
 
     private Long drivingSchoolId;
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles().stream()
+                .map(Role::name)
+                .map(SimpleGrantedAuthority::new)
+                .toList();
+    }
 }
