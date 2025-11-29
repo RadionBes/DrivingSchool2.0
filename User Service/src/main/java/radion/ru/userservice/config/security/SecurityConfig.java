@@ -21,6 +21,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.*;
 public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity){
         return httpSecurity
                 .sessionManagement(session ->
@@ -30,11 +31,18 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable)
-                .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
+                .authenticationProvider(authenticationProvider())
+                /*.exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                            response.getWriter().write("{\"error\": \"Unauthorized - use API Gateway\"}");
+                        })
+                )*/
                 .build();
     }
 

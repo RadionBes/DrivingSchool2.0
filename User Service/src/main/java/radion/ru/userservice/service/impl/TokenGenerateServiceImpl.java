@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import radion.ru.userservice.config.JwtConfig;
 import radion.ru.userservice.dto.AuthentificationResponse;
 import radion.ru.userservice.entity.RefreshTokenEntity;
 import radion.ru.userservice.entity.UserSchool;
@@ -14,7 +15,6 @@ import radion.ru.userservice.service.TokenService;
 import radion.ru.userservice.service.UserService;
 import radion.ru.userservice.util.JwtUtil;
 
-import javax.crypto.SecretKey;
 import java.util.*;
 
 
@@ -22,13 +22,7 @@ import java.util.*;
 @Setter
 @RequiredArgsConstructor
 public class TokenGenerateServiceImpl implements TokenGenerateService {
-    @Value("${jwt.secretKey.dev.key}")
-    private SecretKey secretKey;
-    @Value("${jwt.secretKey.dev.expiration_access_token}")
-    private String expirationAccessToken;
-    @Value("${jwt.secretKey.dev.expiration_refresh_token}")
-    private String expirationRefreshToken;
-
+    private final JwtConfig jwtConfig;
     private final TokenService tokenService;
     private final UserService userService;
     private final JwtUtil jwtUtil;
@@ -42,22 +36,22 @@ public class TokenGenerateServiceImpl implements TokenGenerateService {
                 .setSubject(email)
                 .setIssuer("your-app")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationAccessToken))
-                .signWith(secretKey)
+                .setExpiration(new Date(System.currentTimeMillis() + jwtConfig.getExpirationAccessToken()))
+                .signWith(jwtConfig.secretKey())
                 .compact();
     }
 
     @Override
     public String generateRefreshToken(UserSchool userSchool) {
         tokenService.deleteAllRefreshTokensByUser(userSchool);
-        var expiryDate = new Date(System.currentTimeMillis() + expirationRefreshToken);
+        var expiryDate = new Date(System.currentTimeMillis() + jwtConfig.getExpirationRefreshToken());
 
         String refreshToken = Jwts.builder()
                 .setSubject(userSchool.getEmail())
                 .setIssuer("your-app")
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
-                .signWith(secretKey)
+                .signWith(jwtConfig.secretKey())
                 .compact();
 
         RefreshTokenEntity refreshTokenEntity = RefreshTokenEntity.builder()
@@ -74,7 +68,7 @@ public class TokenGenerateServiceImpl implements TokenGenerateService {
     public AuthentificationResponse reloadToken(String refreshToken) {
         String newRefreshToken = "";
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(secretKey)
+                .setSigningKey(jwtConfig.secretKey())
                 .build()
                 .parseClaimsJws(refreshToken)
                 .getBody();

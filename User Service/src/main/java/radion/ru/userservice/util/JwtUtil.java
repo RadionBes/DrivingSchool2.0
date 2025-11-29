@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import radion.ru.userservice.config.JwtConfig;
 import radion.ru.userservice.service.TokenService;
 import radion.ru.userservice.service.UserService;
 
@@ -16,8 +17,7 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
-    @Value("${jwt.secretKey.dev.key}")
-    private SecretKey secretKey;
+    private final JwtConfig jwtConfig;
     private final TokenService tokenService;
     private final UserService userService;
 
@@ -25,7 +25,7 @@ public class JwtUtil {
     public boolean validateAccessToken(String token) {
         try {
             Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(jwtConfig.secretKey())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
@@ -41,7 +41,7 @@ public class JwtUtil {
         try {
             // Проверяем подпись и срок действия
             Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(jwtConfig.secretKey())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
