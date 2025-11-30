@@ -3,13 +3,11 @@ package radion.ru.userservice.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import radion.ru.userservice.config.JwtConfig;
 import radion.ru.userservice.service.TokenService;
 import radion.ru.userservice.service.UserService;
 
-import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +19,6 @@ public class JwtUtil {
     private final TokenService tokenService;
     private final UserService userService;
 
-    // Валидация Access токена
     public boolean validateAccessToken(String token) {
         try {
             Claims claims = Jwts.parserBuilder()
@@ -36,7 +33,6 @@ public class JwtUtil {
         }
     }
 
-    // Валидация Refresh токена
     public boolean validateRefreshToken(String token) {
         try {
             // Проверяем подпись и срок действия
@@ -65,5 +61,14 @@ public class JwtUtil {
         claims.put("phoneNumber", user.getPhoneNumber());
         claims.put("state", user.getState().name());
         return claims;
+    }
+
+    public String getEmailFromToken(String token){
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(jwtConfig.secretKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
     }
 }
